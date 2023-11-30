@@ -4,7 +4,7 @@ import mysql.connector
 class DBManager:
     def __init__(self, password, database='people', host="db", user="root"):
         self.connection = mysql.connector.connect(user=user, host=f"{host}", password=password,
-                                                  database=database)
+                                                  database=database, auth_plugin='mysql_native_password')
 
     def create_table(self):
         # with self.connection.cursor()
