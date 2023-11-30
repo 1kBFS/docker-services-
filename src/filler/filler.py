@@ -18,10 +18,11 @@ def get_data(filename: str) -> list:
 if __name__ == '__main__':
     load_dotenv()
     print("TEST!!!")
-    conn = DBManager(password=os.getenv("ROOT_PASSWORD"), host="localhost")
+    # conn = DBManager(password=os.getenv("ROOT_PASSWORD"))
+    conn = DBManager(password="mypassword")
     try:
         conn.create_table()
-        data = get_data("data.csv")
+        data = get_data("/src/filler/data.csv")
         for name, age in data:
             conn.put_data(name, age)
         result_db_contents = conn.select_all()
