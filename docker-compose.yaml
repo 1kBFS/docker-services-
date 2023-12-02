@@ -6,11 +6,9 @@ services:
     command: '--default-authentication-plugin=mysql_native_password'
     healthcheck:
       test: [ 'CMD-SHELL', 'healthcheck.sh --su-mysql --connect --innodb_initialized' ]
-      interval: 3s
+      interval: 5s
+      timeout: 5s
       retries: 5
-      start_period: 30s
-      start_interval: 10s
-      timeout: 30s
     environment:
       MARIADB_ROOT_PASSWORD: ${ROOT_PASSWORD}
       MARIADB_DATABASE: ${MARIADB_DATABASE}
