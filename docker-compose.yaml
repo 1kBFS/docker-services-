@@ -9,6 +9,7 @@ services:
       interval: 3s
       retries: 5
       start_period: 30s
+      start_interval: 10s
       timeout: 30s
     environment:
       MARIADB_ROOT_PASSWORD: ${ROOT_PASSWORD}
