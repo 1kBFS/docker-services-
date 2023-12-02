@@ -22,7 +22,9 @@ services:
     env_file:
       - ./.env
   filler:
-    image: python-filler
+    build:
+      context: src
+      dockerfile: filler/filler.Dockerfile
     volumes:
       - ./data.csv:/src/filler/data.csv
     depends_on:
@@ -30,6 +32,27 @@ services:
         condition: service_healthy
     networks:
       - app_net
+    environment:
+      MARIADB_ROOT_PASSWORD: ${ROOT_PASSWORD}
+    env_file:
+      - ./.env
+  web:
+    build:
+      context: src
+      dockerfile: web/web.Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+      filler:
+        condition: service_completed_successfully
+    environment:
+      MARIADB_ROOT_PASSWORD: ${ROOT_PASSWORD}
+    env_file:
+      - ./.env
+    networks:
+      - app_net
+    ports:
+      - "8000:8000"
 
 
   adminer:

@@ -1,14 +1,12 @@
 import sys
 import csv
 import os
-from dotenv import load_dotenv
-
 sys.path.append("..")
 from src.DBManager import DBManager
 
 
 def get_data(filename: str) -> list:
-    with open("data.csv", "r") as csvfile:
+    with open(filename, "r") as csvfile:
         next(csvfile)
         reader = csv.reader(csvfile, delimiter=',')
         data = [(row[0], int(row[1])) for row in reader]
@@ -16,10 +14,7 @@ def get_data(filename: str) -> list:
 
 
 if __name__ == '__main__':
-    load_dotenv()
-    print("TEST!!!")
-    # conn = DBManager(password=os.getenv("ROOT_PASSWORD"))
-    conn = DBManager(password="mypassword")
+    conn = DBManager(password=os.environ['MARIADB_ROOT_PASSWORD'])
     try:
         conn.create_table()
         data = get_data("/src/filler/data.csv")
