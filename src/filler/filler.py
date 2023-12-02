@@ -7,7 +7,6 @@ from src.DBManager import DBManager
 
 def get_data(filename: str) -> list:
     with open(filename, "r") as csvfile:
-        next(csvfile)
         reader = csv.reader(csvfile, delimiter=',')
         data = [(row[0], int(row[1])) for row in reader]
         return data
