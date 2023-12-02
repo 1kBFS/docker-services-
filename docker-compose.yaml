@@ -42,8 +42,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-#      filler:
-#        condition: se
+      filler:
+        condition: service_started
     environment:
       MARIADB_ROOT_PASSWORD: ${ROOT_PASSWORD}
     env_file:
