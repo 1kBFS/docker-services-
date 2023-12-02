@@ -55,16 +55,16 @@ services:
       - "8000:8000"
 
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "80:8080"
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - app_net
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - "80:8080"
+#    depends_on:
+#      db:
+#        condition: service_healthy
+#    networks:
+#      - app_net
 volumes:
   db-data:
 networks:
